@@ -1,0 +1,136 @@
+/* Modal backdrop */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it appears above other content */
+  animation: fadeIn 0.5s;
+  /* Animation for fading in */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  /* Set a width for the modal */
+  max-width: 90%;
+  /* Responsive width */
+  animation: slideIn 0.5s;
+  /* Animation for sliding in */
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Close button */
+.close {
+  cursor: pointer;
+  font-size: 24px;
+  transition: opacity 0.3s;
+}
+
+.close:hover {
+  opacity: 0.7;
+}
+
+.slide-out {
+  animation: SlideOut 0.3s;
+}
+
+@keyframes SlideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+
+/* Modal body */
+.modal-body {
+  padding: 20px;
+}
+
+/* Animation for modal fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animation for modal slide in */
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Auth button */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.auth-form {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.auth-form input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.auth-form p {
+  margin: 0;
+  padding: 10px 0;
+}
