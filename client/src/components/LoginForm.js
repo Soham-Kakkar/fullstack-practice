@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
+import { login } from  '../api';
+
+import { jwtDecode } from 'jwt-decode';
 
 export default function LoginForm({ onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-      
-      if (!response.ok) throw new Error(data.message || 'Login failed');
-      onLoginSuccess();
-      // Assuming token-based authentication:
-      localStorage.setItem('token', data.token);
-      console.log(`${data.username} - Log In successful`);
+      const loginResponse = await login(email, password);
+      onLoginSuccess(loginResponse.token);
+      console.log(`${jwtDecode(loginResponse.token).username} - Log In successful`);
     } catch (error) {
       setError(error.message);
     }

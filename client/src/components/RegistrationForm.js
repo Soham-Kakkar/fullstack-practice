@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { register }  from '../api';
 
 export default function RegistrationForm({ onRegisterSuccess }) {
   const [username, setUsername] = useState('');
@@ -14,17 +15,9 @@ export default function RegistrationForm({ onRegisterSuccess }) {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      });
-      const data = await response.json();
-      
-      if (!response.ok) throw new Error(data.message || 'Registration failed');
-
+      const registration = await register(username, email, password);
       onRegisterSuccess();  // Switch to login mode upon success
-      console.log(`${data.username} Registered successfully`);
+      console.log(`${registration.username} Registered successfully`);
     } catch (error) {
       setError(error.message);
     }
